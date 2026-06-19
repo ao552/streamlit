@@ -16,14 +16,12 @@ st.set_page_config(page_title="現場写真管理", layout="wide")
 # ==========================================
 # PostgreSQL (Supabase)
 # ==========================================
-import os
 DATABASE_URL = os.environ.get("DATABASE_URL")
-# postgresql:// を postgresql+psycopg2:// に変換
 if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+psycopg2://", 1)
 elif DATABASE_URL and DATABASE_URL.startswith("postgresql://"):
     DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg2://", 1)
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL, connect_args={"sslmode": "require"})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
