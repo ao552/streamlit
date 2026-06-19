@@ -2,3 +2,4 @@ streamlit
 sqlalchemy
 bcrypt
 pillow
+psycopg2-binary
